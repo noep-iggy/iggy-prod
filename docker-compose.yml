@@ -10,6 +10,8 @@ services:
     container_name: iggy-back
     restart: always
     env_file: .env
+    volumes:
+      - ./public/files:/usr/src/app/public/files
     ports:
       - '8000:8000'
     depends_on:
