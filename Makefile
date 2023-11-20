@@ -13,3 +13,20 @@ stop: ## Stop production
 
 delete: ## Delete production
 	docker-compose -f docker-compose.yml down && rm -rf ./db_data
+
+logs: ## Show logs production
+	docker logs iggy-back
+
+#-- UBUNTU
+
+ubuntu.start: ## Start ubuntu
+	cp .env.exemple .env && docker compose up -d
+
+ubuntu.stop: ## Stop ubuntu
+	docker stop iggy-back && docker stop iggy-db
+
+ubuntu.delete: ## Delete ubuntu
+	docker compose down && rm -rf ./db_data
+
+ubuntu.logs: ## Show logs ubuntu
+	docker logs iggy-back -f
