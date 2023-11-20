@@ -26,7 +26,7 @@ ubuntu.stop: ## Stop ubuntu
 	docker stop iggy-back && docker stop iggy-db
 
 ubuntu.delete: ## Delete ubuntu
-	sudo docker compose down && sudo rm -rf ./db_data && sudo rm -rf ./public/files/ && sudo docker image rm iggy-back
+	sudo docker compose down && sudo rm -rf ./db_data && sudo rm -rf ./public/files/ && sudo docker image rm noephilippe/iggy-back
 
 ubuntu.logs: ## Show logs ubuntu
 	docker logs iggy-back -f
