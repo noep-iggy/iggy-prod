@@ -12,10 +12,10 @@ mac.stop: ## Stop production
 	docker stop iggy-back && docker stop iggy-db
 
 mac.delete: ## Delete production
-	docker-compose -f docker-compose.yml down && rm -rf ./db_data
+	docker-compose -f docker-compose.yml down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-back
 
 mac.logs: ## Show logs production
-	docker logs iggy-back
+	docker logs iggy-back -f
 
 #-- UBUNTU
 
@@ -26,7 +26,7 @@ stop: ## Stop ubuntu
 	docker stop iggy-back && docker stop iggy-db
 
 delete: ## Delete ubuntu
-	sudo docker compose down && sudo rm -rf ./db_data && sudo rm -rf ./public/files/* && sudo docker image rm noephilippe/iggy-back
+	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-back
 
 logs: ## Show logs ubuntu
 	docker logs iggy-back -f
