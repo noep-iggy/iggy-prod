@@ -48,4 +48,4 @@ services:
 
 volumes:
   upload:
-  iggy-db:
+  db:
