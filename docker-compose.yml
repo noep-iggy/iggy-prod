@@ -5,6 +5,17 @@ networks:
     driver: bridge
 
 services:
+  iggy-backoffice:
+    image: 'noephilippe/iggy-backoffice:latest'
+    container_name: iggy-backoffice
+    restart: always
+    ports:
+      - '3000:3000'
+    depends_on:
+      - iggy-back
+    networks:
+      - iggy-network
+
   iggy-back:
     image: 'noephilippe/iggy-back:latest'
     container_name: iggy-back
@@ -37,4 +48,4 @@ services:
 
 volumes:
   upload:
-  db:
+  iggy-db:
