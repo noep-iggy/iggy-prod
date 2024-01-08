@@ -32,11 +32,14 @@ restart.all: ## Restart
 
 #-- DELETE
 
-api.delete: ## Delete
+delete.api: ## Delete
 	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-back
 
-backoffice.delete: ## Delete
+delete.backoffice: ## Delete
 	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-backoffice
+
+delete.all: ## Delete
+	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-back && docker image rm noephilippe/iggy-backoffice
 	
 #-- LOGS
 
