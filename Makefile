@@ -4,29 +4,41 @@ help:
 	| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m %-43s\033[0m %s\n", $$1, $$2}' \
 	| sed -e 's/\[32m #-- /[33m/'
 
-#-- MAC
-mac.start:  ## Start project
-	cp .env.exemple .env && docker-compose up -d
+#-- GENERAL
 
-mac.stop: ## Stop production
-	docker stop iggy-back && docker stop iggy-db
-
-mac.delete: ## Delete production
-	docker-compose -f docker-compose.yml down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-back
-
-mac.logs: ## Show logs production
-	docker logs iggy-back -f
-
-#-- UBUNTU
-
-start: ## Start ubuntu
+create: ## Create
 	cp .env.exemple .env && docker compose up -d
 
-stop: ## Stop ubuntu
+#-- START
+start: ## Start
+	docker start iggy-back && docker start iggy-db && docker start iggy-backoffice
+
+#-- STOP
+api.stop: ## Stop api
 	docker stop iggy-back && docker stop iggy-db
 
-delete: ## Delete ubuntu
+backoffice.stop: ## Stop backoffice
+	docker stop iggy-backoffice
+
+#-- RESTART
+restart.api: ## Restart
+	make api.delete && make create
+
+restart.backoffice: ## Restart
+	make backoffice.delete && make create
+
+#-- DELETE
+
+api.delete: ## Delete
 	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-back
 
-logs: ## Show logs ubuntu
+backoffice.delete: ## Delete
+	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-backoffice
+	
+##-- LOGS
+
+api.logs: ## Show api logs
 	docker logs iggy-back -f
+
+backoffice.logs: ## Show backoffice logs
+	docker logs iggy-backoffice -f
