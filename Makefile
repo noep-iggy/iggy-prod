@@ -27,6 +27,9 @@ restart.api: ## Restart
 restart.backoffice: ## Restart
 	make backoffice.delete && make create
 
+restart.all: ## Restart
+	make api.delete && make backoffice.delete && make create
+
 #-- DELETE
 
 api.delete: ## Delete
@@ -35,7 +38,7 @@ api.delete: ## Delete
 backoffice.delete: ## Delete
 	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-backoffice
 	
-##-- LOGS
+#-- LOGS
 
 api.logs: ## Show api logs
 	docker logs iggy-back -f
