@@ -14,10 +14,10 @@ start: ## Start
 	docker start iggy-back && docker start iggy-db && docker start iggy-backoffice
 
 #-- STOP
-api.stop: ## Stop api
+stop.api: ## Stop api
 	docker stop iggy-back && docker stop iggy-db
 
-backoffice.stop: ## Stop backoffice
+stop.backoffice: ## Stop backoffice
 	docker stop iggy-backoffice
 
 #-- RESTART
@@ -32,19 +32,19 @@ restart.all: ## Restart
 
 #-- DELETE
 
-api.delete: ## Delete
+delete.api: ## Delete
 	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-back
 
-backoffice.delete: ## Delete
+delete.backoffice: ## Delete
 	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-backoffice
 
-all.delete: ## Delete
+delete.all: ## Delete
 	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-back && docker image rm noephilippe/iggy-backoffice
 	
 #-- LOGS
 
-api.logs: ## Show api logs
+logs.api: ## Show api logs
 	docker logs iggy-back -f
 
-backoffice.logs: ## Show backoffice logs
+logs.backoffice: ## Show backoffice logs
 	docker logs iggy-backoffice -f
