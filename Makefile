@@ -28,7 +28,7 @@ restart.backoffice: ## Restart
 	make backoffice.delete && make create
 
 restart.all: ## Restart
-	make api.delete && make backoffice.delete && make create
+	make api.delete && docker image rm noephilippe/iggy-backoffice && make create
 
 #-- DELETE
 
