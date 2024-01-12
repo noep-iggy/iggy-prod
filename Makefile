@@ -10,8 +10,14 @@ create: ## Create
 	cp .env.exemple .env && docker compose up -d
 
 #-- START
-start: ## Start
-	docker start iggy-back && docker start iggy-db && docker start iggy-backoffice
+start.api: ## Start api
+	docker start iggy-db && docker start iggy-back
+
+start.backoffice: ## Start backoffice
+	docker start iggy-backoffice
+
+start.all: ## Start
+	docker start iggy-db && docker start iggy-back && docker start iggy-backoffice
 
 #-- STOP
 stop.api: ## Stop api
@@ -33,13 +39,13 @@ restart.all: ## Restart
 #-- DELETE
 
 delete.api: ## Delete
-	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-back
+	docker compose down && docker image rm noephilippe/iggy-back
 
 delete.backoffice: ## Delete
-	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-backoffice
+	docker compose down && docker image rm noephilippe/iggy-backoffice
 
 delete.all: ## Delete
-	docker compose down && docker volume rm iggy-prod_upload && docker volume rm iggy-prod_db && docker image rm noephilippe/iggy-back && docker image rm noephilippe/iggy-backoffice
+	docker compose down && docker image rm noephilippe/iggy-back && docker image rm noephilippe/iggy-backoffice
 	
 #-- LOGS
 
