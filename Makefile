@@ -40,10 +40,6 @@ restart.all: ## Restart
 clean.api: ## Clean
 	docker compose down && docker volume rm iggy-prod_db iggy-prod_upload && docker compose up -d
 
-#-- MIGRATION 
-migrate.api: ## Migrate
-	docker container exec -it iggy-back npm run migrate
-
 #-- DELETE
 
 delete.api: ## Delete
